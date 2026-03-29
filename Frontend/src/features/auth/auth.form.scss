@@ -1,0 +1,499 @@
+// ─────────────────────────────────────────
+// Auth Pages — Dark / Black Theme
+// ─────────────────────────────────────────
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+
+// ── Variables ─────────────────────────────
+$font-heading: 'Space Grotesk', sans-serif;
+$font-body:    'Inter', sans-serif;
+
+$clr-bg:           #0a0a0a;
+$clr-surface:      #111111;
+$clr-surface-2:    #1a1a1a;
+$clr-border:       #2a2a2a;
+$clr-border-focus: #555555;
+$clr-text:         #f0f0f0;
+$clr-muted:        #777777;
+$clr-placeholder:  #444444;
+
+// Accent — purple to hot pink
+$clr-accent:       #a855f7;
+$clr-accent-2:     #ec4899;
+$clr-accent-glow:  rgba(168, 85, 247, 0.25);
+
+$clr-btn-text:     #ffffff;
+$clr-error:        #ff5f5f;
+$clr-success:      #4ade80;
+
+$radius-sm:  0.45rem;
+$radius-md:  0.75rem;
+$radius-lg:  1.1rem;
+$radius-xl:  1.5rem;
+
+$shadow-card:  0 0 0 1px #1f1f1f,
+               0 24px 60px rgba(0, 0, 0, 0.6),
+               0 8px 20px rgba(0, 0, 0, 0.4);
+$shadow-glow:  0 0 0 3px $clr-accent-glow;
+$shadow-btn:   0 4px 20px rgba(168, 85, 247, 0.45);
+
+$transition: 0.2s ease;
+
+
+// ── Reset ─────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+// ── Body ──────────────────────────────────
+body {
+  font-family: $font-body;
+  background-color: $clr-bg;
+  color: $clr-text;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+
+// ── Main Layout ───────────────────────────
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+
+  // Gradient mesh background
+  background-color: $clr-bg;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124, 92, 252, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(196, 92, 252, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 60% 40%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+
+  // Subtle grid overlay
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    // background-image:
+    //   linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    //   linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .logo {
+  position: absolute;
+  top: 1.5rem;
+  left: 15%;
+  transform: translateX(-50%);
+  //give diff font famaily
+  font-family: $font-heading;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: $clr-text;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    top: 1rem;
+  }
+}
+
+
+  // ── Form Container ─────────────────────
+  .form-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: $clr-surface;
+    border: 1px solid $clr-border;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-card;
+    padding: 2.5rem 2.25rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    // Top accent line
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, $clr-accent, $clr-accent-2, transparent);
+      border-radius: 999px;
+    }
+
+
+    // ── Header ───────────────────────────
+    .form-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+
+      .form-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $clr-accent;
+        background: rgba(168, 85, 247, 0.1);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+        border-radius: 999px;
+        padding: 0.2rem 0.65rem;
+        width: fit-content;
+        margin-bottom: 0.35rem;
+
+        &::before {
+          content: '';
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: $clr-accent;
+          box-shadow: 0 0 6px $clr-accent;
+          animation: pulse-dot 2s infinite;
+        }
+      }
+
+      h1, h2 {
+        font-family: $font-heading;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $clr-text;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+
+        span {
+          background: linear-gradient(135deg, $clr-accent, $clr-accent-2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: $clr-muted;
+        font-weight: 400;
+      }
+    }
+
+
+    // ── Divider ──────────────────────────
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      color: $clr-placeholder;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      &::before, &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: $clr-border;
+      }
+    }
+
+
+    // ── Footer ───────────────────────────
+    .form-footer {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: $clr-muted;
+    }
+  }
+
+
+  // ── Form ──────────────────────────────
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+
+  // ── Input Group ───────────────────────
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: darken($clr-text, 30%);
+      letter-spacing: 0.02em;
+    }
+
+    .input-wrapper {
+      position: relative;
+
+      .input-icon {
+        position: absolute;
+        left: 0.9rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $clr-placeholder;
+        font-size: 1rem;
+        pointer-events: none;
+        transition: color $transition;
+      }
+
+      &:focus-within .input-icon {
+        color: $clr-accent;
+      }
+
+      input {
+        padding-left: 2.6rem;
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: $clr-surface-2;
+      border: 1px solid $clr-border;
+      border-radius: $radius-md;
+      font-family: $font-body;
+      font-size: 0.9375rem;
+      color: $clr-text;
+      outline: none;
+      transition: border-color $transition, box-shadow $transition, background $transition;
+
+      &::placeholder {
+        color: $clr-placeholder;
+        font-weight: 300;
+      }
+
+      &:hover {
+        border-color: $clr-border-focus;
+      }
+
+      &:focus {
+        border-color: $clr-accent;
+        box-shadow: $shadow-glow;
+        background: lighten($clr-surface-2, 3%);
+      }
+
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 999px $clr-surface-2 inset;
+        -webkit-text-fill-color: $clr-text;
+        caret-color: $clr-text;
+      }
+    }
+
+    .error-msg {
+      font-size: 0.75rem;
+      color: $clr-error;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+  }
+
+
+  // ── Input Meta Row (label + forgot link) ──
+  .input-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -0.25rem;
+
+    label {
+      font-size: 0.78rem;
+      color: $clr-muted;
+    }
+  }
+
+
+  // ── Primary Button ────────────────────
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: $radius-md;
+    background: linear-gradient(135deg, $clr-accent 0%, $clr-accent-2 100%);
+    color: $clr-btn-text;
+    font-family: $font-heading;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: opacity $transition, transform $transition, box-shadow $transition;
+    margin-top: 0.25rem;
+    position: relative;
+    overflow: hidden;
+
+    // Shimmer sweep on hover
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.45s ease;
+    }
+
+    &:hover {
+      box-shadow: $shadow-btn;
+      opacity: 0.92;
+
+      &::after {
+        transform: translateX(100%);
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+
+  // ── Ghost Button (OAuth / Social) ─────
+  .btn-ghost {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.72rem 1.5rem;
+    border: 1px solid $clr-border;
+    border-radius: $radius-md;
+    background: $clr-surface-2;
+    color: $clr-text;
+    font-family: $font-body;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background $transition, border-color $transition, box-shadow $transition;
+
+    img, svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background: lighten($clr-surface-2, 5%);
+      border-color: $clr-border-focus;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+
+  // ── Links ─────────────────────────────
+  a {
+    color: $clr-accent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color $transition;
+
+    &:hover {
+      color: $clr-accent-2;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+
+  // ── Checkbox ──────────────────────────
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input[type='checkbox'] {
+      width: 15px;
+      height: 15px;
+      accent-color: $clr-accent;
+      cursor: pointer;
+    }
+
+    label {
+      font-size: 0.8125rem;
+      color: $clr-muted;
+      cursor: pointer;
+    }
+  }
+
+
+  // ── Two-column row ────────────────────
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+
+    @media (max-width: 400px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  // ── Password Strength Bar ─────────────
+  .strength-bar {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.35rem;
+
+    span {
+      flex: 1;
+      height: 3px;
+      border-radius: 999px;
+      background: $clr-border;
+      transition: background 0.3s ease;
+
+      &.weak   { background: $clr-error; }
+      &.medium { background: #f59e0b; }
+      &.strong { background: $clr-success; }
+    }
+  }
+
+
+  // ── Responsive ────────────────────────
+  @media (max-width: 480px) {
+    .form-container {
+      padding: 2rem 1.5rem 1.75rem;
+      border-radius: $radius-lg;
+    }
+  }
+}
+
+
+// ── Keyframes ─────────────────────────────
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 6px  #a855f7; }
+  50%       { opacity: 0.5; box-shadow: 0 0 12px #a855f7; }
+}
