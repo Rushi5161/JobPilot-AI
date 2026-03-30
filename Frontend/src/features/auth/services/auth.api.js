@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
     withCredentials: true
 })
 
@@ -16,7 +16,7 @@ export async function register({ username, email, password }) {
         return response.data
 
     } catch (err) {
-        console.log("axios register error:", err)
+        throw err.response?.data || err.message;
 
     }
 
@@ -33,7 +33,7 @@ export async function login({ email, password }) {
         return response.data
 
     } catch (err) {
-        console.log("axios login error:", err)
+        throw err.response?.data || err.message;
     }
 
 }
@@ -46,7 +46,7 @@ export async function logout() {
         return response.data
 
     } catch (err) {
-        console.log("axios logout error:", err)
+        throw err.response?.data || err.message;
     }
 }
 
@@ -59,7 +59,7 @@ export async function getMe() {
         return response.data
 
     } catch (err) {
-        console.log("axios get-me error:", err)
+        throw err.response?.data || err.message;
     }
 
 }
