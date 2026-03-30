@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 import { AuthNavbar } from '../components/AuthNavbar'
+import "../auth.form.scss"
 
 const Register = () => {
 
@@ -9,7 +10,6 @@ const Register = () => {
     const [ username, setUsername ] = useState("")
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
-    const [ error, setError ] = useState("")
 
     const {loading,handleRegister} = useAuth()
     
@@ -24,9 +24,8 @@ const Register = () => {
     }
 
     return (
-        <>
+        <main>
             <AuthNavbar />
-            <main>
 
             <div className="form-container">
                 <h1>Register</h1>
@@ -59,7 +58,6 @@ const Register = () => {
                 <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
             </div>
         </main>
-        </>
     )
 }
 
