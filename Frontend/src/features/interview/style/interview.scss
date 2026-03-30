@@ -35,6 +35,26 @@ $severity-low: #3fb950;
     box-sizing: border-box;
 }
 
+  .logo {
+  position: absolute;
+  top: 1.5rem;
+  left: 15%;
+  transform: translateX(-50%);
+  font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    top: 1.2rem;
+  }
+}
+
+.logo span {
+  color:blueviolet;
+} 
+
 // ── 3-Column Layout ───────────────────────────────────────────────────────────
 .interview-layout {
     display: flex;

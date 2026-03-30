@@ -97,18 +97,21 @@ main {
   top: 1.5rem;
   left: 15%;
   transform: translateX(-50%);
-  //give diff font famaily
-  font-family: $font-heading;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: $clr-text;
+  font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 0.8rem;
+  font-weight: 900;
   letter-spacing: -0.02em;
+  cursor: pointer;
 
   @media (max-width: 480px) {
     font-size: 1.25rem;
-    top: 1rem;
+    top: 1.2rem;
   }
 }
+
+.logo span {
+  color:blueviolet;
+} 
 
 
   // ── Form Container ─────────────────────

@@ -16,6 +16,7 @@ const QuestionCard = ({ item, index }) => {
     const [ open, setOpen ] = useState(false)
     return (
         <div className='q-card'>
+
             <div className='q-card__header' onClick={() => setOpen(o => !o)}>
                 <span className='q-card__index'>Q{index + 1}</span>
                 <p className='q-card__question'>{item.question}</p>

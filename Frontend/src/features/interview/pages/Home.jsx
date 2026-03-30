@@ -29,6 +29,8 @@ const Home = () => {
     return (
         <div className='home-page'>
 
+            <div className="logo"><h1>JobPilot <span>AI</span></h1></div>
+
             {/* Page Header */}
             <header className='page-header'>
                 <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
