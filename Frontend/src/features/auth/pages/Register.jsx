@@ -15,30 +15,8 @@ const Register = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setError("")
-
-        if (!username.trim() || !email.trim() || !password.trim()) {
-            setError("Please fill in all fields.")
-            return
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!emailRegex.test(email)) {
-            setError("Please enter a valid email address.")
-            return
-        }
-
-        if (password.length < 6) {
-            setError("Password must be at least 6 characters long.")
-            return
-        }
-
-        const success = await handleRegister({ username, email, password })
-        if (success) {
-            navigate("/interview")
-        } else {
-            setError("Registration failed. Please try again with valid details.")
-        }
+        await handleRegister({username,email,password})
+        navigate("/interview");
     }
 
     if(loading){
@@ -52,8 +30,6 @@ const Register = () => {
 
             <div className="form-container">
                 <h1>Register</h1>
-
-                {error && <p style={{ color: '#ff6b6b', fontSize: '0.95rem', marginBottom: '0.7rem' }}>{error}</p>}
 
                 <form onSubmit={handleSubmit}>
 

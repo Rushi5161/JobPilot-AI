@@ -11,29 +11,11 @@ const Login = () => {
 
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
-    const [ error, setError ] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setError("")
-
-        if (!email.trim() || !password.trim()) {
-            setError("Please enter both email and password.")
-            return
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!emailRegex.test(email)) {
-            setError("Please enter a valid email address.")
-            return
-        }
-
-        const success = await handleLogin({ email, password })
-        if (success) {
-            navigate('/interview')
-        } else {
-            setError("Login failed. Check your credentials and try again.")
-        }
+        await handleLogin({email,password})
+        navigate('/interview')
     }
 
     if(loading){
@@ -47,7 +29,6 @@ const Login = () => {
             <main>
             <div className="form-container">
                 <h1>Login</h1>
-                {error && <p style={{ color: '#ff6b6b', fontSize: '0.95rem', marginBottom: '0.7rem' }}>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
