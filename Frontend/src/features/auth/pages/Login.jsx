@@ -32,7 +32,7 @@ const Login = () => {
         if (success) {
             navigate('/interview')
         } else {
-            setError("Invalid credentials. Please check and try again.")
+            setError("Login failed. Check your credentials and try again.")
         }
     }
 
@@ -47,7 +47,7 @@ const Login = () => {
             <main>
             <div className="form-container">
                 <h1>Login</h1>
-                {error && <p style={{ color: '#ff5a5a', marginBottom: '0.8rem' }}>{error}</p>}
+                {error && <p style={{ color: '#ff6b6b', fontSize: '0.95rem', marginBottom: '0.7rem' }}>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>

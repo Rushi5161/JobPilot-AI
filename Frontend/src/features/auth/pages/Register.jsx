@@ -1,8 +1,7 @@
 import React,{useState} from 'react'
-import { useNavigate, Link } from 'react-router'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { AuthNavbar } from '../components/AuthNavbar'
-import "../auth.form.scss"
 
 const Register = () => {
 
@@ -10,13 +9,36 @@ const Register = () => {
     const [ username, setUsername ] = useState("")
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ error, setError ] = useState("")
 
     const {loading,handleRegister} = useAuth()
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/interview");
+        setError("")
+
+        if (!username.trim() || !email.trim() || !password.trim()) {
+            setError("Please fill in all fields.")
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
+            setError("Please enter a valid email address.")
+            return
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long.")
+            return
+        }
+
+        const success = await handleRegister({ username, email, password })
+        if (success) {
+            navigate("/interview")
+        } else {
+            setError("Registration failed. Please try again with valid details.")
+        }
     }
 
     if(loading){
@@ -24,11 +46,14 @@ const Register = () => {
     }
 
     return (
-        <main>
+        <>
             <AuthNavbar />
+            <main>
 
             <div className="form-container">
                 <h1>Register</h1>
+
+                {error && <p style={{ color: '#ff6b6b', fontSize: '0.95rem', marginBottom: '0.7rem' }}>{error}</p>}
 
                 <form onSubmit={handleSubmit}>
 
@@ -58,6 +83,7 @@ const Register = () => {
                 <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
             </div>
         </main>
+        </>
     )
 }
 
