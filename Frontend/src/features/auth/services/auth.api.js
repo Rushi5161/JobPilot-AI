@@ -7,7 +7,7 @@ const api = axios.create({
 })
 
 export async function register({ username, email, password }) {
-
+    console.log("API URL:", import.meta.env.VITE_API_URL);
     try {
         const response = await api.post('/api/auth/register', {
             username, email, password
