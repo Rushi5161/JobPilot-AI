@@ -67,7 +67,7 @@ const Interview = () => {
         if (interviewId) {
             getReportById(interviewId)
         }
-    }, [getReportById, interviewId])
+    }, [interviewId])
 
 
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./LandingPage.scss";
 
 const NAV_LINKS = ["Features", "How It Works", "Tech Stack", "About"];
@@ -167,8 +168,8 @@ export default function LandingPage() {
           </ul>
 
           <div className="lp__nav-cta">
-            <a href="/login" className="lp__btn lp__btn--ghost">Login</a>
-            <a href="/register" className="lp__btn lp__btn--primary">Get Started</a>
+            <Link to="/login" className="lp__btn lp__btn--ghost">Login</Link>
+            <Link to="/register" className="lp__btn lp__btn--primary">Get Started</Link>
           </div>
 
           <button className={`lp__hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
@@ -202,9 +203,9 @@ export default function LandingPage() {
           </p>
 
           <div className="lp__hero-actions">
-            <a href="/register" className="lp__btn lp__btn--primary lp__btn--lg">
+            <Link to="/register" className="lp__btn lp__btn--primary lp__btn--lg">
               Start for Free <span className="lp__btn-arrow">→</span>
-            </a>
+            </Link>
             <button className="lp__btn lp__btn--ghost lp__btn--lg" onClick={() => scrollTo("how-it-works")}>
               See How It Works
             </button>

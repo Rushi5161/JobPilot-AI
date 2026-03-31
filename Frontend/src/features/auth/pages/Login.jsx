@@ -17,16 +17,16 @@ const Login = () => {
         e.preventDefault()
         setError("")
 
-        if (!email.trim() || !password.trim()) {
-            setError("Please enter both email and password.")
-            return
-        }
+        // if (!email.trim() || !password.trim()) {
+        //     setError("Please enter both email and password.")
+        //     return
+        // }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!emailRegex.test(email)) {
-            setError("Please enter a valid email address.")
-            return
-        }
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        // if (!emailRegex.test(email)) {
+        //     setError("Please enter a valid email address.")
+        //     return
+        // }
 
         const success = await handleLogin({ email, password })
         if (success) {
