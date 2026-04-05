@@ -17,7 +17,6 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-// ✅ ROOT ROUTE
 app.get("/", (req, res) => {
   res.send("JobPilot API is running 🚀");
 });
