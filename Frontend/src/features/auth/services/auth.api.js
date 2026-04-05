@@ -6,6 +6,17 @@ const api = axios.create({
     withCredentials: true
 })
 
+// Add token to requests if available
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("authToken")
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+}, (error) => {
+    return Promise.reject(error)
+})
+
 export async function register({ username, email, password }) {
     console.log("API URL:", import.meta.env.VITE_API_URL);
     try {

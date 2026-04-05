@@ -11,6 +11,16 @@ function createJWT(user) {
   )
 }
 
+function setTokenCookie(res, token) {
+  const isProduction = process.env.NODE_ENV === "production"
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  })
+}
+
 /**
  * @name registerUserController
  * @description register a new user, expects username, email and password in the request body
@@ -45,13 +55,7 @@ async function registerUserController(req, res) {
     })
 
     const token = createJWT(user)
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000,
-    })
+    setTokenCookie(res, token)
 
     res.status(201).json({
       message: "User registered successfully",
@@ -112,13 +116,7 @@ async function loginUserController(req, res) {
     }
 
     const token = createJWT(user)
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000,
-    })
+    setTokenCookie(res, token)
 
     res.status(200).json({
       message: "User logged in successfully",
@@ -173,12 +171,16 @@ async function logoutUserController(req, res) {
  * @access private
  */
 async function getMeController(req, res) {
-  try {
+  try { 
+  
     const user = await userModel.findById(req.user.id)
 
     if (!user) {
       return res.status(404).json({ message: "User not found" })
     }
+
+    const token = createJWT(user)
+    setTokenCookie(res, token)
 
     res.status(200).json({
       message: "User details fetched successfully",
@@ -203,55 +205,4 @@ module.exports = {
   loginUserController,
   logoutUserController,
   getMeController,
-}
-
-
-/**
- * @name logoutUserController
- * @description clear token from user cookie and add the token in blacklist
- * @access public
- */
-async function logoutUserController(req, res) {
-    const token = req.cookies.token
-
-    if (token) {
-        await tokenBlacklistModel.create({ token })
-    }
-
-    res.clearCookie("token")
-
-    res.status(200).json({
-        message: "User logged out successfully"
-    })
-}
-
-/**
- * @name getMeController
- * @description get the current logged in user details.
- * @access private
- */
-async function getMeController(req, res) {
-
-    const user = await userModel.findById(req.user.id)
-
-
-
-    res.status(200).json({
-        message: "User details fetched successfully",
-        user: {
-            id: user._id,
-            username: user.username,
-            email: user.email
-        }
-    })
-
-}
-
-
-
-module.exports = {
-    registerUserController,
-    loginUserController,
-    logoutUserController,
-    getMeController
 }

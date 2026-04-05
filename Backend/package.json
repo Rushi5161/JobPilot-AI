@@ -1,5 +1,6 @@
 {
-  "name": "yt-genai",
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "jobpilot-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",

@@ -2,8 +2,8 @@
 // Auth Pages — Dark / Black Theme
 // ─────────────────────────────────────────
 
+@use "sass:color";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 
 
 // ── Variables ─────────────────────────────
@@ -244,7 +244,7 @@ main {
     label {
       font-size: 0.78rem;
       font-weight: 500;
-      color: darken($clr-text, 30%);
+      color: color.adjust($clr-text, $lightness: -30%);
       letter-spacing: 0.02em;
     }
 
@@ -295,7 +295,7 @@ main {
       &:focus {
         border-color: $clr-accent;
         box-shadow: $shadow-glow;
-        background: lighten($clr-surface-2, 3%);
+        background: color.adjust($clr-surface-2, $lightness: 3%);
       }
 
       &:-webkit-autofill {
@@ -406,7 +406,7 @@ main {
     }
 
     &:hover {
-      background: lighten($clr-surface-2, 5%);
+      background: color.adjust($clr-surface-2, $lightness: 5%);
       border-color: $clr-border-focus;
       box-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
