@@ -1,19 +1,22 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
     withCredentials: true,
 })
-// Add token to requests if available
+
+// Attach bearer token from localStorage for protected API calls
 api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken")
     if (token) {
+        config.headers = config.headers || {}
         config.headers.Authorization = `Bearer ${token}`
     }
     return config
 }, (error) => {
     return Promise.reject(error)
 })
+
 
 /**
  * @description Service to generate interview report based on user self description, resume and job description.
@@ -25,7 +28,7 @@ export const generateInterviewReport = async ({ jobDescription, selfDescription,
     formData.append("selfDescription", selfDescription)
     formData.append("resume", resumeFile)
 
-    const response = await api.post("/api/interview", formData, {
+    const response = await api.post("/api/interview/", formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         }

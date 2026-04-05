@@ -3,10 +3,12 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const tokenBlacklistModel = require("../models/blacklist.model")
 
+const JWT_SECRET = process.env.JWT_SECRET || "default-secret"
+
 function createJWT(user) {
   return jwt.sign(
     { id: user._id, username: user.username, email: user.email },
-    process.env.JWT_SECRET || "default-secret",
+    JWT_SECRET,
     { expiresIn: "1d" }
   )
 }
