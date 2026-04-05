@@ -1,17 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/package.json",
   "name": "jobpilot-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@google/genai": "^1.47.0",
     "bcryptjs": "^3.0.3",
@@ -23,7 +16,7 @@
     "mongoose": "^9.3.3",
     "multer": "^2.1.1",
     "pdf-parse": "^1.1.1",
-    "puppeteer": "^24.37.5",
+    "puppeteer-core": "^24.40.0",
     "zod": "^3.25.76",
     "zod-to-json-schema": "^3.25.1"
   }

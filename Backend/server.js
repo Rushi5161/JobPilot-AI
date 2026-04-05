@@ -3,6 +3,7 @@ const app = express()
 const cookieParser = require("cookie-parser")
 const cors = require("cors");
 require("dotenv").config()
+
 const connectToDB = require("./src/config/database")
 connectToDB();
 
@@ -16,15 +17,18 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-/* require all the routes here */
+// ✅ ROOT ROUTE
+app.get("/", (req, res) => {
+  res.send("JobPilot API is running 🚀");
+});
+
+/* routes */
 const authRouter = require("./src/routes/auth.routes")
 const interviewRouter = require("./src/routes/interview.routes")
 
-
-/* using all the routes here */
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
+  console.log(`Server is running on port ${PORT}`)
 })
